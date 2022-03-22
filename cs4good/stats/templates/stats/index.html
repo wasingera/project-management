@@ -1,0 +1,10 @@
+{% for project in projects %}
+<div>
+    <h3>{{ project.name }}</h3>
+    <ul>
+    {% for person in project.assigned %}
+    <li>{{ person.name }}</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endfor %}

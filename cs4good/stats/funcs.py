@@ -1,5 +1,5 @@
 import csv
-from classes import *
+from .classes import *
 
 def readProjects(file):
     projects = []

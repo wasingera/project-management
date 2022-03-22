@@ -1,5 +1,14 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="file" name="file">
+    <label for="projects">Projects</label>
+    <input type="file" name="projects">
+    <br>
+    <br>
+    
+    <label for="people">People</label>
+    <input type="file" name="people">
+    <br>
+    <br>
+
     <input type="submit">
 </form>
