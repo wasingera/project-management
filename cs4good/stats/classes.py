@@ -2,6 +2,7 @@ class Project:
 
     weights = 5
 
+    # define class attributes
     def __init__(self, name, grade, prevExp, prevLeader, leaderApp, major, spots):
         self.name = name
         self.grade = grade
@@ -13,11 +14,13 @@ class Project:
         self.assigned = []
 
     # W = SUM( w * x ) / n -- weighted average
+    # Do formula with weights
     def calcWeight(self, person):
         s = self.grade * person.grade + self.prevExp * person.prevExp + self.prevLeader * person.prevLeader + self.leaderApp * person.leaderApp + self.major * person.major
 
         return s / self.weights
 
+    # get the lowest weight applicant and its index
     def getLowest(self):
         # weight, index
         low = (self.calcWeight(self.assigned[0]), 0)
@@ -29,11 +32,13 @@ class Project:
 
         return low
 
+    # check if their is an empty spot on project
     def isEmptySlot(self):
         if len(self.assigned) < self.spots:
             return True
         return False
 
+    # print out the matches
     def printMatches(self):
         print(self.name)
         for p in self.assigned:
@@ -41,10 +46,12 @@ class Project:
         print()
 
     def __str__(self):
+        # format for printing class attributes
         s = "%s, %s, %s, %s, %s, %s, %s, %s" % (self.name, self.grade, self.prevExp, self.prevLeader, self.leaderApp, self.major, self.spots, self.assigned)
         return s
 
 class Person:
+    # define person attributes
     def __init__(self, name, email, grade, prevExp, prevLeader, leaderApp, major, choices):
         self.name = name
         self.email = email
@@ -56,5 +63,6 @@ class Person:
         self.choices = choices
 
     def __str__(self):
+        # format for printing attributes
         s = "%s, %s, %s, %s, %s, %s, %s, %s" % (self.name, self.email, self.grade, self.prevExp, self.prevLeader, self.leaderApp, self.major, self.choices)
         return s
