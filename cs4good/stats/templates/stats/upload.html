@@ -20,7 +20,7 @@ li a {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-	font-size: 20pt;
+	font-size: 16pt;
 }
 
 li a:hover:not(.active) {
@@ -30,28 +30,61 @@ li a:hover:not(.active) {
 .active {
   background-color: #C99700;
 }
+
+.item1 {
+	float: left;
+}
+
+.item2 {
+	float: right;
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: max-content auto;
+	grid-template-rows: 600px;
+	background-color: #00843D;
+}
+
+
 </style>
 </head>
+
 <body>
+<div>
+	<ul>
+  	<li><a href="./index.html">Home</a></li>
+  	<li style="float:right"><a class="active" href="./upload.html">Upload</a></li>
+	</ul>
+</div>
 
-<ul>
-  <li><a href="./index.html">Home</a></li>
-  <li style="float:right"><a class="active" href="./upload.html">Upload</a></li>
-</ul>
-
-
-
-<form method="post" enctype="multipart/form-data">
+<div class="grid-container">
+<br>
+<form enctype="multipart/form-data" method="post" style="text-align:center;">
     {% csrf_token %}
+		<div class="item1">
+		<br><br>
     <label for="projects">Projects</label>
     <input type="file" name="projects">
-    <br>
+    <br> <br>
     <br>
     
     <label for="people">People</label>
     <input type="file" name="people">
     <br>
     <br>
+		</div>
 
-    <input type="submit">
+		<div class="item3">
+			<br><br>
+    	<input type="submit" style="font-size: 16pt">
+		</div>
+
+		<br>
+		<img src="./csforgood.png" alt="CS for Good" style="width:750px;height:450px;">
+
 </form>
+</div>
+
+</body>
+</html>
