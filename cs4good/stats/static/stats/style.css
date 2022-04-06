@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+* {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        font-size: 100%;
+        vertical-align: baseline;
+        background: transparent;
+}
+
+.navbar {
+    background: #0C2340;
+    height: 50px;
+    margin: 0;
+    margin-bottom: 50px;
+    padding-left: 25px;
+    font-family: 'Lato', sans-serif;
+}
+
+.navbar-link {
+    font-size: 20px;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 13px 16px;
+    text-decoration: none;
+}
+
+.navbar-link:hover {
+    background-color: #111;
+}
+
+.navbar-right {
+    float: right;
+}
+
+.grid-container {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.upload-form-item {
+    margin-bottom: 15px;
+}
+
+.upload-form-item label {
+}

@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .funcs import readProjects, findMatches, stats
+
+from .funcs import readProjects, findMatches, makeRankings, stats
 
 # Create your views here.
 
 def index(request):
-    projects = findMatches()
+
+    projects = makeRankings()
 
     info = []
 
@@ -16,6 +18,7 @@ def index(request):
     print(info)
 
     return render(request, 'stats/index.html', { 'projects': projects, 'info': info })
+
 
 def upload(request):
     if request.method == "POST":

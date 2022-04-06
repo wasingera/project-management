@@ -1,89 +1,85 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #0C2340;
-}
+    <link rel="stylesheet" href="{% static 'stats/style.css' %}">
+<!-- <style> -->
+<!-- ul { -->
+<!--   list-style-type: none; -->
+<!--   margin: 0; -->
+<!--   padding: 0; -->
+<!--   overflow: hidden; -->
+<!--   background-color: #0C2340; -->
+<!-- } -->
 
-li {
-  float: left;
-}
+<!-- li { -->
+<!--   float: left; -->
+<!-- } -->
 
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-	font-size: 16pt;
-}
+<!-- li a { -->
+<!--   display: block; -->
+<!--   color: white; -->
+<!--   text-align: center; -->
+<!--   padding: 14px 16px; -->
+<!--   text-decoration: none; -->
+<!-- 	font-size: 16pt; -->
+<!-- } -->
 
-li a:hover:not(.active) {
-  background-color: #111;
-}
+<!-- li a:hover:not(.active) { -->
+<!--   background-color: #111; -->
+<!-- } -->
 
-.active {
-  background-color: #C99700;
-}
+<!-- .active { -->
+<!--   background-color: #C99700; -->
+<!-- } -->
 
-.item1 {
-	float: left;
-}
+<!-- .item1 { -->
+<!-- 	float: left; -->
+<!-- } -->
 
-.item2 {
-	float: right;
-}
+<!-- .item2 { -->
+<!-- 	float: right; -->
+<!-- } -->
 
-.grid-container {
-	display: grid;
-	grid-template-columns: max-content auto;
-	grid-template-rows: 600px;
-	background-color: #00843D;
-}
+<!-- .grid-container { -->
+<!-- 	display: grid; -->
+<!-- 	grid-template-columns: max-content auto; -->
+<!-- 	grid-template-rows: 600px; -->
+<!-- 	background-color: #00843D; -->
+<!-- } -->
 
 
-</style>
+<!-- </style> -->
 </head>
 
 <body>
-<div>
-	<ul>
-  	<li><a href="./index.html">Home</a></li>
-  	<li style="float:right"><a class="active" href="./upload.html">Upload</a></li>
-	</ul>
-</div>
+
+{% include 'stats/navbar.html' %}
 
 <div class="grid-container">
-<br>
-<form enctype="multipart/form-data" method="post" style="text-align:center;">
-    {% csrf_token %}
-		<div class="item1">
-		<br><br>
-    <label for="projects">Projects</label>
-    <input type="file" name="projects">
-    <br> <br>
     <br>
-    
-    <label for="people">People</label>
-    <input type="file" name="people">
-    <br>
-    <br>
-		</div>
+    <form enctype="multipart/form-data" method="post" class="upload-form">
+        {% csrf_token %}
 
-		<div class="item3">
-			<br><br>
-    	<input type="submit" style="font-size: 16pt">
-		</div>
+        <div class="upload-form-item">
+            <label for="projects">Projects</label>
+            <input type="file" name="projects">
+        </div>
 
-		<br>
-		<img src="./csforgood.png" alt="CS for Good" style="width:750px;height:450px;">
+        <div class="upload-form-item">
+            <label for="people">People</label>
+            <input type="file" name="people">
+        </div>
 
-</form>
+        <div class="upload-form-item">
+            <br><br>
+            <input type="submit" style="font-size: 16pt">
+        </div>
+
+        <br>
+        <img src="{% static 'stats/csforgood.png' %}" alt="CS for Good" style="width:750px;height:450px;">
+
+    </form>
 </div>
 
 </body>

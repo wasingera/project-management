@@ -119,6 +119,27 @@ def match(person, projects):
             match(replaced, projects)
             break
 
+def makeRankings():
+    ''' creates list sorted by weight for a project with all applicants to club as entries'''
+    projects = readProjects("projects.csv")
+    people = readPeople("people.csv")
+
+    projectNames = {}
+
+    for i in range(0, len(projects)):
+        name = projects[i].name
+        projectNames[name] = i
+
+    for proj in projects:
+        for p in people:
+            weight = proj.calcWeight(p)
+
+            proj.assigned.append((p, weight))
+
+        proj.assigned.sort(reverse=True, key=lambda x: x[1])
+    return projects
+
+
 def findMatches():
     ''' returns list of projects with a filled applicants field '''
 
