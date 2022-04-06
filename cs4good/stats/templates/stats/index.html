@@ -49,6 +49,18 @@
 </div>
 {% endfor %}
 
+{% for stat in info %}
+<div>
+  <h3>{{ stat.name }}</h3>
+  <ul>
+    <li>Freshman: {{ stat.2025 }}</li> <br>
+    <li>Sophomores: {{ stat.2024 }}</li> <br>
+    <li>Juniors: {{ stat.2023 }}</li> <br>
+    <li>Seniors: {{ stat.2022 }}</li> <br>
+  </ul>
+</div>
+
+{% endfor %}
 
 
 </body>

@@ -1,13 +1,23 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .funcs import readProjects, findMatches, makeRankings
+
+from .funcs import readProjects, findMatches, makeRankings, stats
 
 # Create your views here.
 
 def index(request):
+
     projects = makeRankings()
-    # return render(request, 'stats/base.html')
-    return render(request, 'stats/index.html', { 'projects': projects })
+
+    info = []
+
+    for project in projects:
+        years = stats(project)
+        info.append(years)
+
+    print(info)
+
+    return render(request, 'stats/index.html', { 'projects': projects, 'info': info })
 
 
 def upload(request):
