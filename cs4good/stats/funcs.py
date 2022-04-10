@@ -180,6 +180,6 @@ def stats(project):
     years = {'name': project.name, 2022 : 0, 2023 : 0, 2024 : 0, 2025 : 0}
 
     for member in project.assigned:
-        years[member.grade] += 1
+        years[member[0].grade] += 1
 
     return years
