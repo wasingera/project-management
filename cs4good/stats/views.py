@@ -1,23 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from .funcs import readProjects, findMatches, makeRankings, stats
+from .funcs import readProjects, findMatches, makeRankings, choicePerSeniority
 
 # Create your views here.
 
 def index(request):
-
+    
     projects = makeRankings()
-
-    info = []
-
-    for project in projects:
-        years = stats(project)
-        info.append(years)
-
-    print(info)
-
-    return render(request, 'stats/index.html', { 'projects': projects, 'info': info })
+    choiceSeniority = choicePerSeniority(projects)
+    plot_div1 = choiceSeniority.to_html()
+    
+    return render(request, 'stats/index.html', { 'projects': projects, 'plot_div': plot_div1 })
 
 
 def upload(request):

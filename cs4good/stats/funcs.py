@@ -1,5 +1,12 @@
+from calendar import c
 import csv
+
+from matplotlib import projections
 from .classes import *
+
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+from pandas import DataFrame
 
 def readProjects(file):
     ''' takes in a csv filename, returns a list of projects'''
@@ -175,11 +182,63 @@ def findMatches():
 
     return projects
 
-def stats(project):
+def make_df(proj):
 
-    years = {'name': project.name, 2022 : 0, 2023 : 0, 2024 : 0, 2025 : 0}
+    #add current class years calculator
+    df = DataFrame(columns = ['grade', 'frequency'])
 
-    for member in project.assigned:
-        years[member.grade] += 1
+    grades = {'2025' : 0, '2024': 0, '2023': 0, '2022': 0}
 
-    return years
+    for member in proj.assigned:
+        grades[str(member[0].grade)] += 1
+
+    for key,value in grades.items():
+        grade = {'grade':key, 'frequency':value}
+        df = df.append(grade, ignore_index = True)
+
+    return df
+
+def choicePerSeniority(projects):
+
+    num_proj = len(projects)
+    num_rows = int((num_proj /2)) + (num_proj % 2)
+    num_cols = 2
+    
+    count = 0
+
+    proj2D = []
+    
+    for i in range(num_rows):
+        row = []
+        for j in range(num_cols):
+            if count < num_proj:
+                row.append(make_df(projects[count]))
+            count += 1
+
+        proj2D.append(row) 
+
+    proj_names = []
+    for proj in projects:
+        proj_names.append(proj.name)
+
+    fig = make_subplots(rows = num_rows, cols = num_cols, start_cell= 'top-left', subplot_titles=tuple(proj_names) )
+
+    for i in range(num_rows):
+        for j in range(num_cols): 
+            if j < len(proj2D[i]):
+                for grade,freq in proj2D[i][j].groupby('grade'):  
+                    fig.add_trace(go.Bar(x = freq['grade'], y = freq['frequency'], 
+                    name = grade, 
+                    hovertemplate="Grade = %{x}<br>Number of Applicants = %{y}<extra></extra>"),
+                    row=i+1, col=j+1)
+                    
+                    fig.update_layout(legend_title_text = "grade")
+                    fig.update_xaxes(title_text="Seniority")
+                    fig.update_yaxes(title_text="Number of Applicants")
+                    fig.update_layout(showlegend=False, 
+                                      height = 800,
+                                      title_text= "Project Choice by Seniority")
+                    fig.update_yaxes(automargin=True)
+                    fig.update_xaxes(automargin=True)
+                    
+    return fig
