@@ -1,7 +1,6 @@
 from calendar import c
 import csv
 
-from matplotlib import projections
 from .classes import *
 
 from plotly.subplots import make_subplots
