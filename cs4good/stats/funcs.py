@@ -196,7 +196,12 @@ def make_df(proj):
         grade = {'grade':key, 'frequency':value}
         df = df.append(grade, ignore_index = True)
 
+<<<<<<< HEAD
     return df
+=======
+    for member in project.assigned:
+        years[member[0].grade] += 1
+>>>>>>> 097113bf207fbf10da5dcf592d631e8cf9567f94
 
 def choicePerSeniority(projects):
 
