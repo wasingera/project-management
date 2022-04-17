@@ -3,3 +3,5 @@ include/
 lib/
 pyvenv.cfg
 *.pyc
+etc/
+share/
