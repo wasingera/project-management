@@ -9,9 +9,8 @@ def index(request):
     
     projects = makeRankings()
     choiceSeniority = choicePerSeniority(projects)
-    plot_div1 = choiceSeniority.to_html()
     
-    return render(request, 'stats/index.html', { 'projects': projects, 'plot_div': plot_div1 })
+    return render(request, 'stats/index.html', { 'projects': projects, 'plot_div': choiceSeniority })
 
 
 def upload(request):

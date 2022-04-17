@@ -36,8 +36,10 @@
 <!-- </style> -->
 </head>
 <body>
+  
 {% include 'stats/navbar.html' %}
 
+<!-- 
 {% for project in projects %}
 <div>
     <h3>{{ project.name }}</h3>
@@ -48,6 +50,7 @@
     </ul>
 </div>
 {% endfor %}
+
 
 {% for stat in info %}
 <div>
@@ -62,9 +65,15 @@
 
 {% endfor %}
 
-{% autoescape off %}
-  {{ plot_div }}
-{% endautoescape %}
+-->
+
+{% for fig in plot_div %}
+  {% autoescape off %}
+    {{ fig }}
+  {% endautoescape %}
+
+{% endfor %}
+
 
 
 </body>

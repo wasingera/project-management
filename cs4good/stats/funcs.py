@@ -1,4 +1,3 @@
-from calendar import c
 import csv
 
 from .classes import *
@@ -181,27 +180,48 @@ def findMatches():
 
     return projects
 
-def make_df(proj):
+def make_dfs(proj):
 
-    #add keys for all years
     #make maps for places
-    #add current class years calculator
-    df = DataFrame(columns = ['grade', 'frequency'])
+    df1 = DataFrame(columns = ['grade', 'frequency'])
 
-    grades = {'2025' : 0, '2024': 0, '2023': 0, '2022': 0}
+    
+    grades = {}
+
+    minGrade = 2999
+
+    for member in proj.assigned:
+        if member[0].grade < minGrade:
+            minGrade = member[0].grade
+
+    for i in range(minGrade,minGrade+4):
+        grades[str(i)] = 0
+    
 
     for member in proj.assigned:
         grades[str(member[0].grade)] += 1
 
     for key,value in grades.items():
         grade = {'grade':key, 'frequency':value}
-        df = df.append(grade, ignore_index = True)
+        df1 = df1.append(grade, ignore_index = True)
 
-    return df
+    df2 = DataFrame(columns = ['Item','Frequency'])
+    df2 = df2.append({'Item':'Want Leadership','Frequency':0}, ignore_index=True )
+    df2 = df2.append({'Item':'Do Not Want Leadership','Frequency':0}, ignore_index=True)
+
+    for member in proj.assigned:
+        if member[0].leaderApp == 1:
+            df2.iat[0,1] += 1
+        else:
+            df2.iat[1,1] += 1
+
+    return df1,df2
 
 def choicePerSeniority(projects):
 
+    ''' 
     num_proj = len(projects)
+
     num_rows = int((num_proj /2)) + (num_proj % 2)
     num_cols = 2
     
@@ -213,7 +233,7 @@ def choicePerSeniority(projects):
         row = []
         for j in range(num_cols):
             if count < num_proj:
-                row.append(make_df(projects[count]))
+                row.append(make_dfs(projects[count])[0])
             count += 1
 
         proj2D.append(row) 
@@ -242,4 +262,53 @@ def choicePerSeniority(projects):
                     fig.update_yaxes(automargin=True)
                     fig.update_xaxes(automargin=True)
                     
-    return fig
+    #return fig
+    '''
+
+    figs = []
+    numRows = 1
+    numCols = 2
+
+    
+
+    for proj in projects:
+        df1,df2 = make_dfs(proj)
+
+
+        fig = make_subplots(rows = numRows, cols = numCols, start_cell= 'top-left', subplot_titles=('Popularity Per Seniority', 'Number of Applicants Applying for Leadership'))
+
+        for grade,freq in df1.groupby('grade'):  
+            fig.add_trace(go.Bar(x = freq['grade'], y = freq['frequency'], 
+                name = grade, 
+                hovertemplate="Grade = %{x}<br>Number of Applicants = %{y}<extra></extra>"),
+                row=1, col=1)
+                    
+            fig.update_layout(legend_title_text = "grade")
+            fig.update_xaxes(title_text="Seniority")
+            fig.update_yaxes(title_text="Number of Applicants")
+            fig.update_layout(showlegend=False, 
+                              height = 800,
+                              title_text= proj.name)
+            fig.update_yaxes(automargin=True)
+            fig.update_xaxes(automargin=True)
+        
+        for item,freq in df2.groupby('Item'):
+            fig.add_trace(go.Bar(x = freq['Item'], y = freq['Frequency'],
+                                 name = item,
+                                 hovertemplate ="Choice = %{x}<br>Applicants = %{y}<extra></extra>" ),
+                          row = 1, col = 2)
+
+            fig.update_layout(legend_title_text = "Choice")
+            fig.update_xaxes(title_text="Choice")
+            fig.update_yaxes(title_text="Applicants")
+            fig.update_layout(showlegend=False, 
+                              height = 800,
+                              title_text= proj.name)
+            fig.update_yaxes(automargin=True)
+            fig.update_xaxes(automargin=True)
+
+        HTMLfig = fig.to_html()
+
+        figs.append(HTMLfig)
+
+    return figs
