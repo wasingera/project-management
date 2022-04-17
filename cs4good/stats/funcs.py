@@ -183,6 +183,8 @@ def findMatches():
 
 def make_df(proj):
 
+    #add keys for all years
+    #make maps for places
     #add current class years calculator
     df = DataFrame(columns = ['grade', 'frequency'])
 
