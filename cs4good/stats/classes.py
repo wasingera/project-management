@@ -52,7 +52,7 @@ class Project:
 
 class Person:
     # define person attributes
-    def __init__(self, name, email, grade, prevExp, prevLeader, leaderApp, major, choices):
+    def __init__(self, name, email, grade, prevExp, prevLeader, leaderApp, major, choices, state):
         self.name = name
         self.email = email
         self.grade = grade
@@ -61,8 +61,9 @@ class Person:
         self.leaderApp = leaderApp
         self.major = major
         self.choices = choices
+        self.state = state
 
     def __str__(self):
         # format for printing attributes
-        s = "%s, %s, %s, %s, %s, %s, %s, %s" % (self.name, self.email, self.grade, self.prevExp, self.prevLeader, self.leaderApp, self.major, self.choices)
+        s = "%s, %s, %s, %s, %s, %s, %s, %s, %s" % (self.name, self.email, self.grade, self.prevExp, self.prevLeader, self.leaderApp, self.major, self.choices, self.state)
         return s
