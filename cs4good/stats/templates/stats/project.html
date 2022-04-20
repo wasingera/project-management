@@ -1,0 +1,27 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'stats/style.css' %}">
+    </head>
+
+    <body>
+        {% include 'stats/navbar.html' %}
+
+        <div class="project-container">
+            <div class="project-list">
+                <ul>
+                    {% for project in projects %}
+                    <a href="/{{ forloop.counter0 }}">
+                        <li class="project-list-item">{{ project.name }}</li>
+                    </a>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="project-data">
+                {% autoescape off %}
+                    {{ fig }}
+                {% endautoescape %}
+            </div>
+        </div>
+    </body>
+</html>

@@ -48,3 +48,41 @@
 
 .upload-form-item label {
 }
+
+.project-container {
+    display: grid;
+    margin: 30px;
+    height: 85%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.project-list {
+    border: 1px solid blue;
+    grid-column: 1;
+}
+
+.project-data {
+    border: 1px solid purple;
+    grid-column-start: 2;
+    grid-column-end: 6;
+}
+
+.project-list a {
+    text-decoration: none;
+}
+
+.project-list-item {
+    /* text-decoration: none; */
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    font-family: Lato;
+    font-size: 1.5em;
+    border-radius: 3px;
+    background: #318CE7;
+    color: white;
+}
+
+

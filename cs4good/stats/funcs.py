@@ -308,7 +308,7 @@ def makeFigs(projects):
             fig.update_yaxes(automargin=True)
             fig.update_xaxes(automargin=True)
         
-        HTMLfig = fig.to_html()
+        HTMLfig = fig.to_html(full_html=False)
 
         figs.append(HTMLfig)
 
