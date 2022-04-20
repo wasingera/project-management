@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .funcs import readProjects, findMatches, makeRankings, makeFigs, total_dfs, makeTotFigs
@@ -31,7 +31,7 @@ def upload(request):
             for chunk in people.chunks():
                 file.write(chunk)
 
-        return HttpResponse("recieved")
+        return redirect("/")
 
     return render(request, 'stats/upload.html')
 

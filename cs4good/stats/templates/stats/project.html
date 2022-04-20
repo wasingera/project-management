@@ -17,14 +17,17 @@
                     {% endfor %}
                 </ul>
             </div>
-						<div class="project-description">
-							<p> {{ proj.description }} </p>
+            <div class="proj-info">
+                <div class="project-description">
+                    <p> {{ proj.description }} </p>
 
-						</div>
-            <div class="project-data">
-                {% autoescape off %}
+                </div>
+                <div class="project-data">
+                    {% autoescape off %}
                     {{ fig }}
-                {% endautoescape %}
+                    {% endautoescape %}
+                </div>
+
             </div>
             <div class="project-applicants">
                 <h3 class="project-applicants-title">Applicants</h3>

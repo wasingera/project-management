@@ -3,53 +3,6 @@
 <html>
 <head>
     <link rel="stylesheet" href="{% static 'stats/style.css' %}">
-<!-- <style> -->
-<!-- ul { -->
-<!--   list-style-type: none; -->
-<!--   margin: 0; -->
-<!--   padding: 0; -->
-<!--   overflow: hidden; -->
-<!--   background-color: #0C2340; -->
-<!-- } -->
-
-<!-- li { -->
-<!--   float: left; -->
-<!-- } -->
-
-<!-- li a { -->
-<!--   display: block; -->
-<!--   color: white; -->
-<!--   text-align: center; -->
-<!--   padding: 14px 16px; -->
-<!--   text-decoration: none; -->
-<!-- 	font-size: 16pt; -->
-<!-- } -->
-
-<!-- li a:hover:not(.active) { -->
-<!--   background-color: #111; -->
-<!-- } -->
-
-<!-- .active { -->
-<!--   background-color: #C99700; -->
-<!-- } -->
-
-<!-- .item1 { -->
-<!-- 	float: left; -->
-<!-- } -->
-
-<!-- .item2 { -->
-<!-- 	float: right; -->
-<!-- } -->
-
-<!-- .grid-container { -->
-<!-- 	display: grid; -->
-<!-- 	grid-template-columns: max-content auto; -->
-<!-- 	grid-template-rows: 600px; -->
-<!-- 	background-color: #00843D; -->
-<!-- } -->
-
-
-<!-- </style> -->
 </head>
 
 <body>
@@ -62,18 +15,17 @@
         {% csrf_token %}
 
         <div class="upload-form-item">
-            <label for="projects">Projects</label>
+            <label for="projects">Projects:</label>
             <input type="file" name="projects">
         </div>
 
         <div class="upload-form-item">
-            <label for="people">People</label>
+            <label for="people">People:</label>
             <input type="file" name="people">
         </div>
 
         <div class="upload-form-item">
-            <br><br>
-            <input type="submit" style="font-size: 16pt">
+            <button type="submit" class="upload-submit">Submit</button>
         </div>
 
         <br>

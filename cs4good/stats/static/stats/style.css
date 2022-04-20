@@ -42,11 +42,20 @@
     align-content: center;
 }
 
+.upload-form {
+    font-family: Lato;
+}
+
 .upload-form-item {
     margin-bottom: 15px;
 }
 
-.upload-form-item label {
+.upload-submit {
+    background: blue;
+    padding: 5px;
+    border-radius: 3px;
+    color: white;
+    width: 100%;
 }
 
 .project-container {
@@ -60,11 +69,11 @@
     grid-column: 1;
 }
 
-.project-data {
-    grid-column-start: 2;
-    grid-column-end: 5;
-		grid-row: 2;
-}
+/* .project-data { */
+/*     grid-column-start: 2; */
+/*     grid-column-end: 5; */
+/* 		grid-row: 2; */
+/* } */
 
 .project-list a {
     text-decoration: none;
@@ -84,10 +93,23 @@
     color: white;
 }
 
+.proj-info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    grid-column-start: 2;
+    grid-column-end: 5;
+}
+
+.project-data {
+    width: 100%;
+}
+
 .project-applicants {
     font-family: Lato;
-    grid-column-start: 5;
-		grid-row: 1;
+    /* grid-column-start: 5; */
+		/* grid-row: 1; */
 }
 
 .project-applicants-title {
@@ -108,7 +130,10 @@
 .project-description {
 	grid-column-start: 2;
 	grid-column-end: 5;
-	grid-row: 1;
-	border: 1px solid black;
-	margin: 10px;
+	/* grid-row: 1; */
+	/* border: 1px solid black; */
+    margin-left: 50px;
+    margin-right: 50px;
+    font-size: 1.5rem;
 }
+
