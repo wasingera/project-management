@@ -1,14 +1,18 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from .funcs import readProjects, findMatches, makeRankings, makeFigs
+from .funcs import readProjects, findMatches, makeRankings, makeFigs, total_dfs, makeTotFigs
 
 # Create your views here.
 
 def index(request):
     
     projects = makeRankings()
-    choiceSeniority = makeFigs(projects)
+
+    choiceSeniority = makeTotFigs(projects)
+
+    total_dfs(projects)
+
     
     return render(request, 'stats/index.html', { 'projects': projects, 'plot_div': choiceSeniority })
 
