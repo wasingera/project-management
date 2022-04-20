@@ -63,6 +63,7 @@
 .project-data {
     grid-column-start: 2;
     grid-column-end: 5;
+		grid-row: 2;
 }
 
 .project-list a {
@@ -86,6 +87,7 @@
 .project-applicants {
     font-family: Lato;
     grid-column-start: 5;
+		grid-row: 1;
 }
 
 .project-applicants-title {
@@ -101,4 +103,12 @@
 
 .project-applicants-table > td {
     border: 1px solid black;
+}
+
+.project-description {
+	grid-column-start: 2;
+	grid-column-end: 5;
+	grid-row: 1;
+	border: 1px solid black;
+	margin: 10px;
 }
