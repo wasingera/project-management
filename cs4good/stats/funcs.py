@@ -246,7 +246,7 @@ def makeFigs(projects):
                             cols = numCols,
                             start_cell= 'top-left', 
                             specs=[[{'type': 'xy'},
-                                    {'type': 'xy'}],
+                                    {'type': 'pie'}],
                                     [{'type': 'choropleth'},
                                     {'type': 'xy'}]],
                             subplot_titles=('Popularity Per Seniority', 
@@ -271,21 +271,18 @@ def makeFigs(projects):
             fig.update_xaxes(automargin=True)
         
         #Number of Applicants Who Want Leadership
-        for item,freq in df2.groupby('Item'):
-            fig.add_trace(go.Bar(x = freq['Item'], 
-                                 y = freq['Frequency'],
-                                 name = item,
-                                 hovertemplate ="Choice = %{x}<br>Applicants = %{y}<extra></extra>"),
-                          row = 1, col = 2)
 
-            fig.update_layout(legend_title_text = "Choice")
-            fig.update_xaxes(title_text="Choice")
-            fig.update_yaxes(title_text="Applicants")
-            fig.update_layout(showlegend=False, 
-                              height = 800,
-                              title_text= proj.name)
-            fig.update_yaxes(automargin=True)
-            fig.update_xaxes(automargin=True)
+        fig.add_trace(go.Pie(   labels = df2['Item'],
+                                values = df2['Frequency'],
+                                hovertemplate ="Choice = %{label}<br>Applicants = %{value}<extra></extra>"),
+                        row = 1, col = 2)
+
+        fig.update_layout(legend_title_text = "Choice")
+        fig.update_layout(showlegend=False, 
+                            height = 800,
+                            title_text= proj.name)
+        fig.update_yaxes(automargin=True)
+        fig.update_xaxes(automargin=True)
 
         
         #Number of Applicants Per State
@@ -310,8 +307,6 @@ def makeFigs(projects):
             fig.update_yaxes(automargin=True)
             fig.update_xaxes(automargin=True)
         
-
-
         HTMLfig = fig.to_html(full_html=False)
 
         figs.append(HTMLfig)
