@@ -30,3 +30,17 @@ def upload(request):
         return HttpResponse("recieved")
 
     return render(request, 'stats/upload.html')
+
+def project(request, project):
+    projects = makeRankings()
+    figs = makeFigs(projects)
+
+    context = {
+        'projects': projects,
+        'proj': projects[project],
+        'fig': figs[project],
+    }
+    return render(request, 'stats/project.html', context);
+
+    return HttpResponse(projects[project])
+    return HttpResponse('test')
