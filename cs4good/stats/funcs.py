@@ -10,7 +10,7 @@ def readProjects(file):
     ''' takes in a csv filename, returns a list of projects'''
 
     projects = []
-    with open(file) as f:
+    with open(file, encoding="utf-8", errors="ignore") as f:
         reader = csv.reader(f)
 
         # skip title how
@@ -21,7 +21,7 @@ def readProjects(file):
             # pull data out of file
             # the first column is a string, so it can't be converted to float
             # instead we just append one list comprehension to another
-            data = [row[0]] + [float(x) for x in row[1:]]
+            data = [row[0]] + [float(x) for x in row[1:-1]] + [row[-1]]
 
             # make a new project with data
             proj = Project(*data)

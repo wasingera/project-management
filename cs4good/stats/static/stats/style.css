@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
 * {
         margin: 0;
@@ -57,14 +57,13 @@
 }
 
 .project-list {
-    border: 1px solid blue;
     grid-column: 1;
 }
 
 .project-data {
-    border: 1px solid purple;
     grid-column-start: 2;
-    grid-column-end: 6;
+    grid-column-end: 5;
+		grid-row: 2;
 }
 
 .project-list a {
@@ -85,4 +84,31 @@
     color: white;
 }
 
+.project-applicants {
+    font-family: Lato;
+    grid-column-start: 5;
+		grid-row: 1;
+}
 
+.project-applicants-title {
+    font-size: 2rem;
+}
+
+.project-applicants-table {
+    border: 1px solid black;
+    width: 100%;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.project-applicants-table > td {
+    border: 1px solid black;
+}
+
+.project-description {
+	grid-column-start: 2;
+	grid-column-end: 5;
+	grid-row: 1;
+	border: 1px solid black;
+	margin: 10px;
+}

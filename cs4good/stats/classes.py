@@ -3,7 +3,7 @@ class Project:
     weights = 5
 
     # define class attributes
-    def __init__(self, name, grade, prevExp, prevLeader, leaderApp, major, spots):
+    def __init__(self, name, grade, prevExp, prevLeader, leaderApp, major, spots, description):
         self.name = name
         self.grade = grade
         self.prevExp = prevExp
@@ -12,6 +12,7 @@ class Project:
         self.major = major
         self.spots = spots
         self.assigned = []
+        self.description = description
 
     # W = SUM( w * x ) / n -- weighted average
     # Do formula with weights
