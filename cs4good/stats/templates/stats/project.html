@@ -22,6 +22,22 @@
                     {{ fig }}
                 {% endautoescape %}
             </div>
+            <div class="project-applicants">
+                <h3 class="project-applicants-title">Applicants</h3>
+
+                <table class="project-applicants-table">
+                    <tr class="app-table-head">
+                        <th>Name</th>
+                        <th>Weight</th>
+                    </tr>
+                    {% for app in proj.assigned %}
+                    <tr>
+                        <td>{{ app.0.name }}</td>
+                        <td>{{ app.1|floatformat:2 }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
         </div>
     </body>
 </html>
