@@ -258,36 +258,29 @@ def makeFigs(projects):
             fig.add_trace(go.Bar(x = freq['grade'], 
                                 y = freq['frequency'], 
                                 name = grade, 
+                                legendgroup = 'a',
+                                showlegend = False,
                                 hovertemplate="Grade = %{x}<br>Number of Applicants = %{y}<extra></extra>"),
                 row=1, col=1)
                     
-            fig.update_layout(legend_title_text = "grade")
             fig.update_xaxes(title_text="Seniority")
             fig.update_yaxes(title_text="Number of Applicants")
-            fig.update_layout(showlegend=False, 
-                              height = 800,
-                              title_text= proj.name)
-            fig.update_yaxes(automargin=True)
-            fig.update_xaxes(automargin=True)
         
         #Number of Applicants Who Want Leadership
 
-        fig.add_trace(go.Pie(   labels = df2['Item'],
+        fig.add_trace(go.Pie(
+                                labels = df2['Item'],
                                 values = df2['Frequency'],
+                                legendgroup = 'b',
+                                showlegend=True,
                                 hovertemplate ="Choice = %{label}<br>Applicants = %{value}<extra></extra>"),
                         row = 1, col = 2)
-
-        fig.update_layout(legend_title_text = "Choice")
-        fig.update_layout(showlegend=False, 
-                            height = 800,
-                            title_text= proj.name)
-        fig.update_yaxes(automargin=True)
-        fig.update_xaxes(automargin=True)
-
         
         #Number of Applicants Per State
         for state,freq in df3.groupby('State'):
             fig.add_trace(go.Choropleth(showscale=False,
+                                        legendgroup = 'c',
+                                        showlegend = False,
                                         locationmode = "USA-states", 
                                         locations = freq['State'], 
                                         z = freq['Frequency'],
@@ -297,8 +290,8 @@ def makeFigs(projects):
                                         colorbar = dict(xanchor='left', yanchor='bottom'),
                                         hovertemplate = "State = %{location}<br>Applicants = %{z}<extra></extra>"),
                           row = 2, col = 1)
-         
-            fig.update_layout(height = 800,
+            fig.update_layout(legend_title_text = "Choice")
+            fig.update_layout(height = 800, 
                               title_text= proj.name,
                               geo = dict(scope='usa',
                                          projection=go.layout.geo.Projection(type = 'albers usa'),
@@ -306,6 +299,7 @@ def makeFigs(projects):
 
             fig.update_yaxes(automargin=True)
             fig.update_xaxes(automargin=True)
+            fig.update_layout()
         
         HTMLfig = fig.to_html(full_html=False)
 
