@@ -185,7 +185,6 @@ def make_dfs(proj):
 
     df1 = DataFrame(columns = ['grade', 'frequency'])
 
-    
     grades = {}
 
     minGrade = 2999
@@ -199,8 +198,9 @@ def make_dfs(proj):
     
 
     for member in proj.assigned:
-        grades[str(member[0].grade)] += 1
-
+        if proj.name in member[0].choices:
+            grades[str(member[0].grade)] += 1
+                
     for key,value in grades.items():
         grade = {'grade':key, 'frequency':value}
         df1 = df1.append(grade, ignore_index = True)
@@ -210,20 +210,23 @@ def make_dfs(proj):
     df2 = df2.append({'Item':'Do Not Want Leadership','Frequency':0}, ignore_index=True)
 
     for member in proj.assigned:
-        if member[0].leaderApp == 1:
-            df2.iat[0,1] += 1
-        else:
-            df2.iat[1,1] += 1
+        if proj.name in member[0].choices:
+            if member[0].leaderApp == 1:
+                df2.iat[0,1] += 1
+            else:
+                df2.iat[1,1] += 1
 
     df3 = DataFrame(columns = ['State','Frequency'])
 
     states = {}
 
     for member in proj.assigned:
-        states[member[0].state] = 0
+        if proj.name in member[0].choices:
+            states[member[0].state] = 0
     
     for member in proj.assigned:
-        states[member[0].state] += 1
+        if proj.name in member[0].choices:
+            states[member[0].state] += 1
     
     for key,value in states.items():
         df3 = df3.append({'State':key,'Frequency':value}, ignore_index=True)
@@ -232,15 +235,12 @@ def make_dfs(proj):
 
 def makeFigs(projects):
     
-    #fix proj.assigned
-
     figs = []
     numRows = 2
     numCols = 2
 
     for proj in projects:
         df1,df2,df3 = make_dfs(proj)
-        print(df3)
 
         fig = make_subplots(rows = numRows,
                             cols = numCols,
@@ -294,11 +294,13 @@ def makeFigs(projects):
                                         locationmode = "USA-states", 
                                         locations = freq['State'], 
                                         z = freq['Frequency'],
+                                        autocolorscale = True,
                                         name = state,
+                                        colorscale = 'blues',
+                                        colorbar = dict(xanchor='left', yanchor='bottom'),
                                         hovertemplate = "State = %{location}<br>Applicants = %{z}<extra></extra>"),
                           row = 2, col = 1)
-
-            
+         
             fig.update_layout(height = 800,
                               title_text= proj.name,
                               geo = dict(scope='usa',
@@ -308,7 +310,7 @@ def makeFigs(projects):
             fig.update_yaxes(automargin=True)
             fig.update_xaxes(automargin=True)
         
-        HTMLfig = fig.to_html()
+        HTMLfig = fig.to_html(full_html = False)
 
         figs.append(HTMLfig)
 
